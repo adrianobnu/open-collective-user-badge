@@ -14,7 +14,10 @@ export default async function handler(req, res) {
       },
       responseEncoding: 'binary'
     })
-    .then(response => response.data);
+    .then(response => response.data)
+    .catch(error => {
+      throw error;
+    });
 
     res.setHeader('Cache-Control',`s-maxage=${process.env.CACHE_LIFETIME_SECONDS}, stale-while-revalidate`);
     res.writeHead(200, { 'Content-Type': 'image/png' });
