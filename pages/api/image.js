@@ -12,14 +12,17 @@ export default async function handler(req, res) {
         width: 500,
         height: 120 + query.collectives.split(";").length * 10,
       },
-      responseEncoding: 'binary'
+      responseEncoding: "binary",
     })
-    .then(response => response.data)
-    .catch(error => {
+    .then((response) => response.data)
+    .catch((error) => {
       throw error;
     });
 
-    res.setHeader('Cache-Control',`s-maxage=${process.env.CACHE_LIFETIME_SECONDS}, stale-while-revalidate`);
-    res.writeHead(200, { 'Content-Type': 'image/png' });
-    res.end(response,'binary');
+  res.setHeader(
+    "Cache-Control",
+    `s-maxage=${process.env.CACHE_LIFETIME_SECONDS}, stale-while-revalidate`
+  );
+  res.writeHead(200, { "Content-Type": "image/png" });
+  res.end(response, "binary");
 }

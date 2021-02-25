@@ -1,7 +1,6 @@
 export default async function handler(req, res) {
   const { user, type, collectives } = req.query;
 
-  let amount = 0;
   let itens = [];
   let member = [];
 
@@ -18,7 +17,6 @@ export default async function handler(req, res) {
           if (me) {
             const info = getDataTransformed(data, me);
             itens.push(info);
-            amount += info.amount;
             if (member.length === 0) {
               member = await getUser(me);
             }
@@ -27,8 +25,8 @@ export default async function handler(req, res) {
       }
     }
   }
-  
-  res.status(200).json({ itens, amount, member });
+
+  res.status(200).json({ itens, member });
 }
 
 function getDataTransformed(data, member) {

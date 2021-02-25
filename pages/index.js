@@ -1,7 +1,7 @@
 import "tailwindcss/tailwind.css";
 const axios = require("axios");
 
-const Badge = ({ itens, amount, member }) => {
+const Badge = ({ itens, member }) => {
   return (
     <div className="bg-white mt-24 relative shadow-xl mx-auto">
       <div className="flex justify-center">
@@ -25,9 +25,6 @@ const Badge = ({ itens, amount, member }) => {
           </a>
         </div>
         <div className="w-full">
-          <h3 className="font-bold text-center text-gray-600 text-2xl px-4">
-            Total contributions: {amount} USD
-          </h3>
           <div className="mt-5 w-full text-2xl">
             {itens &&
               itens.map((item, index) => {
@@ -63,7 +60,7 @@ export async function getServerSideProps(context) {
     .then((res) => res.data)
     .catch((error) => console.log(error.message));
   return {
-    props: response
+    props: response,
   };
 }
 
